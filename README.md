@@ -20,15 +20,7 @@
     <img src="https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1-Kakarotto-rgb(7,%20193,%2096).svg">
 </a>
 
-## 🏆 Github Stats
-<p align="left">
-    <a href="https://github.com/anuraghazra/github-readme-stats#gh-light-mode-only">
-        <img height=200 src="https://github-readme-stats.vercel.app/api/?username=itskakarotto&show_icons=true&count_private=true&line_height=28&hide_border=true&card_width=347&include_all_commits=true&role=owner,collaborator&exclude_repo=github-readme-stats&theme=default#gh-light-mode-only" />            
-    </a>
-    <a href="https://github.com/anuraghazra/github-readme-stats#gh-dark-mode-only">
-        <img height=200 src="https://github-readme-stats.vercel.app/api/?username=itskakarotto&show_icons=true&count_private=true&line_height=28&hide_border=true&card_width=347&include_all_commits=true&role=owner,collaborator&exclude_repo=github-readme-stats&theme=dark&bg_color=000000#gh-dark-mode-only" />
-    </a>
-</p>
+## 🏆 Github Status
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./.github/assets/snake-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./.github/assets/snake.svg">
