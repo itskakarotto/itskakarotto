@@ -1,9 +1,9 @@
 name: Generate Snake Animation
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:          # 手动触发
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * *"       # 每日 UTC 0 点自动运行
 
 jobs:
   generate:
@@ -23,16 +23,25 @@ jobs:
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: ${{ github.repository_owner }}
+          # 显式传入 token 以确保能读取贡献数据（可选，但推荐）
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           outputs: |
             .github/assets/snake.svg
             .github/assets/snake-dark.svg?palette=github-dark
 
-      - name: Force commit & push
+      - name: List generated files (for debugging)
+        run: ls -la .github/assets/
+
+      - name: Commit & push changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # 无条件强制覆盖文件
+          # 强制添加（即使文件未变也不会报错）
           git add .github/assets/ --force
-          git commit -m "force: update snake heatmap [skip ci]" || true
-          git push origin HEAD:main --force
+
+          # 若有变更则提交，否则跳过
+          git commit -m "chore: update snake heatmap [skip ci]" || echo "No changes to commit"
+
+          # 普通推送（不会触发强制推送保护）
+          git push origin HEAD:main
