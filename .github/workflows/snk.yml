@@ -13,17 +13,19 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - name: Checkout main branch
+      - name: Checkout master branch
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: master               # 改为 master
           persist-credentials: true
+
+      - name: Ensure assets directory exists
+        run: mkdir -p .github/assets
 
       - name: Generate snake SVG
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: ${{ github.repository_owner }}
-          # 显式传入 token 以确保能读取贡献数据（可选，但推荐）
           github_token: ${{ secrets.GITHUB_TOKEN }}
           outputs: |
             .github/assets/snake.svg
@@ -37,11 +39,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # 强制添加（即使文件未变也不会报错）
           git add .github/assets/ --force
 
           # 若有变更则提交，否则跳过
           git commit -m "chore: update snake heatmap [skip ci]" || echo "No changes to commit"
 
-          # 普通推送（不会触发强制推送保护）
-          git push origin HEAD:main
+          # 推送到 master 分支（普通推送，不使用 --force）
+          git push origin HEAD:master
